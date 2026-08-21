@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>念念 AI 复利知识库</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <header class="hero">
+      <div>
+        <p class="eyebrow">NIANNIAN AI · COMPOUNDING KNOWLEDGE</p>
+        <h1>把一次实践<br>变成长期资产。</h1>
+        <p class="lead">用知识卡把 AI 视频、短剧、漫剧、自动化与项目经验变成可理解、可复用、可分发的资产。</p>
+      </div>
+      <div class="version"><strong id="cardCount">—</strong><span>张知识卡 · 本地 MVP</span></div>
+    </header>
+
+    <section class="intent-section">
+      <h2>从目标进入</h2>
+      <div class="intent-grid">
+        <button data-query="短剧">我要做短剧</button>
+        <button data-query="视频生成">我要批量生成视频</button>
+        <button data-query="画布">我要搭建 AI 视频工作台</button>
+        <button data-query="剪辑">我要做智能剪辑</button>
+      </div>
+    </section>
+
+    <section class="map-section">
+      <h2>AI 视频生产地图</h2>
+      <div class="flow"><span>选题</span><i>→</i><span>剧本</span><i>→</i><span>分镜</span><i>→</i><span>角色 / 场景</span><i>→</i><span>图片</span><i>→</i><span>视频</span><i>→</i><span>配音字幕</span><i>→</i><span>剪辑交付</span></div>
+    </section>
+
+    <section class="knowledge-section">
+      <div class="section-heading"><div><h2>知识卡</h2><p id="resultText">正在载入索引…</p></div><a href="../metadata/card-schema.md">查看卡片规范</a></div>
+      <div class="filters">
+        <input id="search" type="search" placeholder="搜索项目、工具、工作流、标签">
+        <select id="type"><option value="">全部类型</option></select>
+        <select id="audience"><option value="">全部分发层</option><option value="public">公开</option><option value="team">团队</option><option value="private">私域</option></select>
+        <select id="status"><option value="">全部状态</option><option value="draft">草稿</option><option value="review">待验证</option><option value="verified">已验证</option><option value="recommended">推荐</option><option value="stale">待更新</option><option value="deprecated">已废弃</option><option value="reference">仅供参考</option></select>
+      </div>
+      <div id="cards" class="cards"></div>
+    </section>
+  </main>
+  <dialog id="detailDialog"><article><button class="close" aria-label="关闭">×</button><div id="detailContent"></div></article></dialog>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

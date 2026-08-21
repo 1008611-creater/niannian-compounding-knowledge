@@ -1,0 +1,13 @@
+# 本地预览与系统文件
+.DS_Store
+Thumbs.db
+
+# 敏感或运行时内容不得提交
+.env
+.env.*
+*.pem
+*.key
+cookies/
+accounts/
+runtime/
+outputs/
