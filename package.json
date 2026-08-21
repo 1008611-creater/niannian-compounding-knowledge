@@ -5,7 +5,8 @@
   "description": "念念 AI 复利知识库：知识卡、工作流与一键应用入口。",
   "scripts": {
     "validate": "node scripts/validate-index.mjs",
-    "serve": "python -m http.server 4173 --directory ."
+    "serve": "python -m http.server 4173 --directory .",
+    "build": "node scripts/build-portal.mjs"
   },
   "engines": {
     "node": ">=18"

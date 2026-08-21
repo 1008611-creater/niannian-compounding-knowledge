@@ -13,4 +13,6 @@ runtime/
 outputs/
 
 # 打包产物可按 release 单独上传，不随源码提交
-dist/
+dist/*
+# 离线自包含门户是分发物，需随仓库提供（供预览/一键分发）
+!dist/portal.html
