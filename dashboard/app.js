@@ -20,7 +20,8 @@ function matches(item) {
 }
 function cardHtml(item) {
   const audience = item.audience.map(value => `<span class="pill">${audienceLabels[value]}</span>`).join('');
-  return `<article class="card"><div class="card-top"><span class="pill status-${escapeHtml(item.status)}">${statusLabels[item.status]}</span><span class="pill">复利 ${item.score}/5</span></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><div class="card-meta"><span>${typeLabels[item.type]}</span><span>·</span><span>${item.difficulty === 'beginner' ? '入门' : item.difficulty === 'intermediate' ? '进阶' : '高级'}</span>${audience}</div><div class="card-actions"><button class="button primary" data-detail="${escapeHtml(item.id)}">查看详情</button><a class="button" href="${detailPath(item.path)}" target="_blank" rel="noreferrer">打开原文</a></div></article>`;
+  const visual = item.visual?.cover ? `<div class="card-cover"><img src="../${escapeHtml(item.visual.cover)}" alt="${escapeHtml(item.title)}视觉封面" loading="lazy"></div>` : '';
+  return `<article class="card ${visual ? 'has-cover' : ''}">${visual}<div class="card-body"><div class="card-top"><span class="pill status-${escapeHtml(item.status)}">${statusLabels[item.status]}</span><span class="pill">复利 ${item.score}/5</span></div><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.summary)}</p><div class="card-meta"><span>${typeLabels[item.type]}</span><span>·</span><span>${item.difficulty === 'beginner' ? '入门' : item.difficulty === 'intermediate' ? '进阶' : '高级'}</span>${audience}</div><div class="card-actions"><button class="button primary" data-detail="${escapeHtml(item.id)}">查看详情</button><a class="button" href="${detailPath(item.path)}" target="_blank" rel="noreferrer">打开原文</a></div></div></article>`;
 }
 function render() {
   const filtered = items.filter(matches);
@@ -31,7 +32,8 @@ function openDetail(id) {
   const item = items.find(candidate => candidate.id === id);
   if (!item) return;
   const source = item.source.url ? `<p><strong>原始来源：</strong><a href="${escapeHtml(item.source.url)}" target="_blank" rel="noreferrer">打开来源</a></p>` : '<p><strong>原始来源：</strong>内部资产</p>';
-  detailContent.innerHTML = `<span class="pill status-${escapeHtml(item.status)}">${statusLabels[item.status]}</span><h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.summary)}</p><p class="detail-meta">${typeLabels[item.type]} · ${item.tags.map(escapeHtml).join(' / ')} · 更新于 ${item.updatedAt} · 维护人：${escapeHtml(item.owner)}</p>${source}<h3>可用动作</h3><p><a class="button primary" href="${detailPath(item.path)}" target="_blank" rel="noreferrer">查看完整知识卡</a></p><p class="detail-meta">一键运行、下载或复制动作仅在资产已验证、具备安全边界且提供实际入口后才会显示。</p>`;
+  const visual = item.visual ? `<h3>视觉卡组</h3><div class="visual-gallery"><img class="visual-cover" src="../${escapeHtml(item.visual.cover)}" alt="${escapeHtml(item.title)}封面"><div class="visual-pages">${item.visual.pages.map((page, index) => `<a href="../${escapeHtml(page)}" target="_blank" rel="noreferrer"><img src="../${escapeHtml(page)}" alt="${escapeHtml(item.title)}第${index + 1}张内页" loading="lazy"></a>`).join('')}</div><p class="detail-meta">视觉档案：${escapeHtml(item.visual.profile)} · 点击图片可查看大图。</p></div>` : '';
+  detailContent.innerHTML = `<span class="pill status-${escapeHtml(item.status)}">${statusLabels[item.status]}</span><h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.summary)}</p><p class="detail-meta">${typeLabels[item.type]} · ${item.tags.map(escapeHtml).join(' / ')} · 更新于 ${item.updatedAt} · 维护人：${escapeHtml(item.owner)}</p>${visual}${source}<h3>可用动作</h3><p><a class="button primary" href="${detailPath(item.path)}" target="_blank" rel="noreferrer">查看完整知识卡</a></p><p class="detail-meta">一键运行、下载或复制动作仅在资产已验证、具备安全边界且提供实际入口后才会显示。</p>`;
   dialog.showModal();
 }
 async function init() {

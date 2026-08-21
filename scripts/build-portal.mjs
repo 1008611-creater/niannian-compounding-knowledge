@@ -11,6 +11,24 @@ const root = resolve(__dirname, '..');
 const index = JSON.parse(readFileSync(join(root, 'metadata', 'index.json'), 'utf8'));
 const css = readFileSync(join(root, 'dashboard', 'styles.css'), 'utf8');
 
+function imageDataUri(relativePath) {
+  const file = join(root, relativePath);
+  const mime = relativePath.endsWith('.png') ? 'image/png' : relativePath.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
+  return `data:${mime};base64,${readFileSync(file).toString('base64')}`;
+}
+
+const embeddedItems = index.items.map(item => {
+  if (!item.visual) return item;
+  return {
+    ...item,
+    visual: {
+      ...item.visual,
+      cover: imageDataUri(item.visual.cover),
+      pages: item.visual.pages.map(imageDataUri)
+    }
+  };
+});
+
 function renderMarkdown(md = '') {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
   const out = [];
@@ -109,7 +127,7 @@ const html = `<!doctype html>
 <dialog id="detailDialog"><article><button class="close" aria-label="关闭">×</button><div id="detailContent"></div></article></dialog>
 
 <script>
-const DATA = ${JSON.stringify(index.items, null, 0)};
+const DATA = ${JSON.stringify(embeddedItems, null, 0)};
 const DETAILS = ${JSON.stringify(details, null, 0)};
 const typeLabels = {tool:'工具',workflow:'工作流',project:'项目',automation:'自动化',method:'方法',retrospective:'复盘',insight:'信息差'};
 const audienceLabels = {public:'公开',team:'团队',private:'私域'};
@@ -131,7 +149,8 @@ function matches(item){
 }
 function cardHtml(item){
   const audience=item.audience.map(v=>'<span class="pill">'+audienceLabels[v]+'</span>').join('');
-  return '<article class="card"><div class="card-top"><span class="pill status-'+escapeHtml(item.status)+'">'+statusLabels[item.status]+'</span><span class="pill">复利 '+item.score+'/5</span></div><h3>'+escapeHtml(item.title)+'</h3><p>'+escapeHtml(item.summary)+'</p><div class="card-meta"><span>'+typeLabels[item.type]+'</span><span>·</span><span>'+(item.difficulty==='beginner'?'入门':item.difficulty==='intermediate'?'进阶':'高级')+'</span>'+audience+'</div><div class="card-actions"><button class="button primary" data-detail="'+escapeHtml(item.id)+'">查看详情</button></div></article>';
+  const visual=item.visual&&item.visual.cover?'<div class="card-cover"><img src="'+escapeHtml(item.visual.cover)+'" alt="'+escapeHtml(item.title)+'视觉封面" loading="lazy"></div>':'';
+  return '<article class="card">'+visual+'<div class="card-body"><div class="card-top"><span class="pill status-'+escapeHtml(item.status)+'">'+statusLabels[item.status]+'</span><span class="pill">复利 '+item.score+'/5</span></div><h3>'+escapeHtml(item.title)+'</h3><p>'+escapeHtml(item.summary)+'</p><div class="card-meta"><span>'+typeLabels[item.type]+'</span><span>·</span><span>'+(item.difficulty==='beginner'?'入门':item.difficulty==='intermediate'?'进阶':'高级')+'</span>'+audience+'</div><div class="card-actions"><button class="button primary" data-detail="'+escapeHtml(item.id)+'">查看详情</button></div></div></article>';
 }
 function render(){
   const filtered=items.filter(matches);
@@ -143,7 +162,8 @@ function openDetail(id){
   if(!item)return;
   const source=item.source&&item.source.url?'<p><strong>原始来源：</strong><a href="'+escapeHtml(item.source.url)+'" target="_blank" rel="noreferrer">打开来源</a></p>':'<p><strong>原始来源：</strong>内部资产</p>';
   const actions=(item.actions&&item.actions.length)?'<h3>可用动作</h3><p>'+item.actions.map(a=>'<a class="button'+(a.kind==='detail'?' primary':'')+'" href="'+(a.target||item.source.url||'#')+'" target="_blank" rel="noreferrer">'+(a.label||'查看')+'</a>').join(' ')+'</p>':'';
-  detailContent.innerHTML='<span class="pill status-'+escapeHtml(item.status)+'">'+statusLabels[item.status]+'</span><h2>'+escapeHtml(item.title)+'</h2><p>'+escapeHtml(item.summary)+'</p><p class="detail-meta">'+typeLabels[item.type]+' · '+item.tags.map(escapeHtml).join(' / ')+' · 更新于 '+item.updatedAt+' · 维护人：'+escapeHtml(item.owner)+'</p>'+source+actions+'<hr>'+DETAILS[id];
+  const visual=item.visual?'<h3>视觉卡组</h3><div class="visual-gallery"><img class="visual-cover" src="'+escapeHtml(item.visual.cover)+'" alt="'+escapeHtml(item.title)+'封面"><div class="visual-pages">'+item.visual.pages.map((page,index)=>'<a href="'+escapeHtml(page)+'" target="_blank" rel="noreferrer"><img src="'+escapeHtml(page)+'" alt="'+escapeHtml(item.title)+'第'+(index+1)+'张内页" loading="lazy"></a>').join('')+'</div><p class="detail-meta">视觉档案：'+escapeHtml(item.visual.profile)+' · 点击图片可查看大图。</p></div>':'';
+  detailContent.innerHTML='<span class="pill status-'+escapeHtml(item.status)+'">'+statusLabels[item.status]+'</span><h2>'+escapeHtml(item.title)+'</h2><p>'+escapeHtml(item.summary)+'</p><p class="detail-meta">'+typeLabels[item.type]+' · '+item.tags.map(escapeHtml).join(' / ')+' · 更新于 '+item.updatedAt+' · 维护人：'+escapeHtml(item.owner)+'</p>'+visual+source+actions+'<hr>'+DETAILS[id];
   dialog.showModal();
 }
 document.querySelector('#cardCount').textContent=items.length;

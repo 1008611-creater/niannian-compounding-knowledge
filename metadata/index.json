@@ -108,6 +108,11 @@
       "updatedAt": "2026-08-21",
       "owner": "念念团队",
       "source": {"type": "internal", "url": ""},
+      "visual": {
+        "cover": "visual/demo-doubao/images/cover.png",
+        "pages": ["visual/demo-doubao/images/page-01.png", "visual/demo-doubao/images/page-02.png", "visual/demo-doubao/images/page-03.png", "visual/demo-doubao/images/page-04.png"],
+        "profile": "toolbox-bot-risograph"
+      },
       "actions": [{"label": "查看团队 SOP 与验收", "kind": "detail", "target": "docs/automation/doubao-fastapi-playwright.md"}]
     },
     {

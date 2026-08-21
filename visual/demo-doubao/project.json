@@ -1,0 +1,15 @@
+{
+  "topic": "豆包视频 FastAPI + Playwright 服务",
+  "audience": "需要把视频生成工具封装成可复用服务的团队与私域用户",
+  "thesis": "把一次浏览器操作封装成可验收、可复用、可分发的视频生成服务。",
+  "language": "zh-CN",
+  "visual_profile": "toolbox-bot-risograph",
+  "post": {"title":"把豆包视频生成封装成真正能用的服务","body":"不是把浏览器脚本换个名字，而是把授权账号、任务状态、无水印结果和验收边界一起封装起来。","hashtags":["#FastAPI","#Playwright","#AI视频","#自动化","#知识卡"]},
+  "cover": {"title":"豆包视频生成服务","subtitle":"FastAPI + Playwright，真正可复用的自动化链路","bottom_takeaway":"把一次操作变成一条可验收的服务链","cognitive_anchor":{"type":"核心判断","reason":"让读者看到这不是一个脚本展示，而是一条有输入、状态、结果和验收门的服务链。"},"metaphor":{"concept":"浏览器操作被封装成服务","physical_action":"工具箱机器人把散落的工具装进带锁工具箱","everyday_object":"带锁工具箱"},"composition":"竖版封面，暖米白纸张背景，深靛蓝与橙红双色孔版印刷。工具箱机器人把浏览器、任务队列、MP4 文件和验收印章装进一个带锁工具箱；标题清晰，画面不堆长文字。","character_action":"工具箱机器人亲手把浏览器操作、状态卡、MP4 文件和验收印章装入工具箱并扣上银色箱扣。","width":1080,"height":1440},
+  "pages": [
+    {"number":1,"title":"它不是一个脚本","archetype":"comparison","local_kind":"comparison","key_message":"脚本能跑，不等于服务能交付。","copy":["脚本：点一下，跑一次","服务：有输入、有状态、有结果","交付：还要有验收边界"],"cognitive_anchor":{"type":"认知转折","reason":"拆掉“自动化=复制点击”的误解。"},"metaphor":{"concept":"脚本与服务的差别","physical_action":"机器人把散落零件装入带标签的工具箱","everyday_object":"零件盒"},"character_action":"机器人亲手分拣并装箱四类零件。","character_pose":"机器人身体前倾，双臂伸向四个分区，夹钳正在放入最后一个零件。","flow":"浏览器操作 → 状态信息 → MP4 文件 → 验收印章","visual":"四个带短标签的零件盒围绕工具箱，深靛蓝线条与橙红连接带形成单一装箱结构。"},
+    {"number":2,"title":"真实链路怎么走？","archetype":"process","local_kind":"flow","key_message":"FastAPI → CDP Worker → 豆包工作室 → MP4","copy":["提交任务","浏览器执行","查询状态","回收结果"],"cognitive_anchor":{"type":"结构理解","reason":"让用户能一眼理解系统组成和结果回收路径。"},"metaphor":{"concept":"服务链路","physical_action":"机器人用两色管道连接四个工作站","everyday_object":"工厂传送带"},"character_action":"机器人亲手连接并检查四段传送带接口。","character_pose":"机器人站在第二与第三工作站之间，左夹钳拧紧接口，右夹钳托住状态卡。","flow":"提交任务 → 浏览器执行 → 查询状态 → 回收 MP4","visual":"四个工作站由一条橙红色传送带连接，接口处用深靛蓝圆点标出，机器人正在中段检修。"},
+    {"number":3,"title":"为什么必须有验收门？","archetype":"boundary","local_kind":"checklist","key_message":"HTTP 成功，不等于视频交付成功。","copy":["结果文件可回读","状态与任务对应","授权边界清楚","下载结果可验收"],"cognitive_anchor":{"type":"边界提醒","reason":"把“接口返回成功”与“用户真的拿到可用 MP4”区分开。"},"metaphor":{"concept":"验收门","physical_action":"机器人用红色验收印章检查箱内文件","everyday_object":"质检闸门"},"character_action":"机器人亲手盖下验收印章，拒绝缺文件或状态不一致的箱子。","character_pose":"机器人站在闸门右侧，身体微蹲，橙红印章压在 MP4 文件与状态卡的交界处。","flow":"文件可回读 → 任务对应 → 授权清楚 → 结果可验收","visual":"质检闸门中央是一枚橙红验收印章，旁边四个短标签围绕一个深靛蓝 MP4 文件盒。"},
+    {"number":4,"title":"一条可复用的服务链","archetype":"summary","local_kind":"checklist","key_message":"输入、执行、状态、结果、验收，缺一不可。","copy":["授权账号","任务接口","状态查询","MP4 回收","验收回执"],"cognitive_anchor":{"type":"最终归纳","reason":"把前面三张卡压缩成可复用的交付检查表。"},"metaphor":{"concept":"可复用服务","physical_action":"机器人扣上工具箱并贴上团队 SOP 标签","everyday_object":"交付箱"},"character_action":"机器人亲手扣紧工具箱，把 SOP 标签贴在箱体正面。","character_pose":"机器人站在工具箱旁，一只夹钳扣上银色箱扣，另一只夹钳压平橙红 SOP 标签。","flow":"授权 → 提交 → 执行 → 状态 → 结果 → 验收","visual":"一个完整工具箱被六个短标签围成闭环，双色套印强调从授权到验收的完整路径。"}
+  ]
+}
