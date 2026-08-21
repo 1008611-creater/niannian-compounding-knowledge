@@ -117,16 +117,16 @@
       "category": "short-drama",
       "summary": "把故事梗概拆成剧本、分镜、素材、视频和剪辑交付的短剧生产骨架。",
       "audience": ["public", "team", "private"],
-      "status": "draft",
+      "status": "review",
       "difficulty": "intermediate",
       "path": "docs/workflows/short-drama-mvp.md",
-      "tags": ["短剧", "分镜", "视频生成"],
-      "score": 5,
+      "tags": ["短剧", "分镜", "视频生成", "审核门", "原创制剧", "源片转绘"],
+      "score": 4,
       "version": "0.1.0",
       "updatedAt": "2026-08-21",
       "owner": "念念团队",
       "source": {"type": "internal", "url": ""},
-      "actions": [{"label": "查看工作流", "kind": "detail", "target": "docs/workflows/short-drama-mvp.md"}]
+      "actions": [{"label": "查看生产模式与审核门", "kind": "detail", "target": "docs/workflows/short-drama-mvp.md"}]
     }
   ]
 }
