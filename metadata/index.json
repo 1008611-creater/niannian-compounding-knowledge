@@ -108,7 +108,7 @@
       "updatedAt": "2026-08-21",
       "owner": "念念团队",
       "source": {"type": "internal", "url": ""},
-      "actions": [{"label": "查看自动化卡", "kind": "detail", "target": "docs/automation/doubao-fastapi-playwright.md"}]
+      "actions": [{"label": "查看团队 SOP 与验收", "kind": "detail", "target": "docs/automation/doubao-fastapi-playwright.md"}]
     },
     {
       "id": "workflow-short-drama-mvp",
